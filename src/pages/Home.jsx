@@ -182,7 +182,7 @@ const Home = () => {
                                 <button onClick={() => setTab(1)} className={`w-1/2 p-[12px] rounded-tl-xl transition-all flex items-center justify-center gap-2 ${tab === 1 ? "bg-gray-200 dark:bg-[#333]" : ""}`}>
                                     <IoMdCode /> Code
                                 </button>
-                                <button onClick={() => setTab(2)} className={`w-1/2 p-[12px] rounded-tr-xl transition-all flex items-center justify-center ${tab === 2 ? "bg-gray-200 dark:bg-[#333]" : ""}`}>
+                                <button onClick={() => setTab(2)} className={`w-1/2 p-[12px] rounded-tr-xl transition-all flex items-center justify-center gap-2 ${tab === 2 ? "bg-gray-200 dark:bg-[#333]" : ""}`}>
                                     <FaEye /> Preview
                                 </button>
                             </div>
