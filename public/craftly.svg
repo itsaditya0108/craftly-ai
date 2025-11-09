@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+    <defs>
+        <linearGradient id="craftlyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#a855f7" />
+            <stop offset="100%" stop-color="#7e22ce" />
+        </linearGradient>
+    </defs>
+
+    <!-- Background Circle -->
+    <circle cx="120" cy="120" r="100" fill="url(#craftlyGrad)" />
+
+    <!-- Stylized "C" with smoother curves -->
+    <path d="M160,80
+           A60,60 0 1,0 160,160
+           L150,145
+           A40,40 0 1,1 150,95Z" fill="white" />
+
+    <!-- Accent Dot for modern touch -->
+    <circle cx="175" cy="80" r="6" fill="white" opacity="0.9" />
+</svg>
