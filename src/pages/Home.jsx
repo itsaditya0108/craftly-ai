@@ -40,11 +40,23 @@ const Home = () => {
 
     const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GOOGLE_API_KEY });
 
+
+    let lastCallTime = 0;
+
     async function getResponse() {
+        const now = Date.now();
+        const elapsed = now - lastCallTime;
+
+        if (elapsed < 6000) {
+            await new Promise((r) => setTimeout(r, 6000 - elapsed));
+        }
+
+        lastCallTime = Date.now();
+
         try {
             setLoading(true);
             const response = await ai.models.generateContent({
-                model: "gemini-2.5-flash",
+                model: "gemini-1.5-flash",
                 contents: `You are an experienced senior web developer and UI/UX designer with deep expertise in modern frontend technologies, responsive design, and animation. 
                 Generate a complete and high-quality UI component based on the following user input:
                  - **Component Description:** ${prompt}
@@ -67,6 +79,7 @@ const Home = () => {
             setLoading(false);
         }
     }
+
 
     const copyCode = async () => {
         try {
@@ -95,10 +108,37 @@ const Home = () => {
     };
 
     const openInNewTab = () => {
+
         const newWindow = window.open();
-        newWindow.document.write(code);
+        const fullHTML = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Preview</title>
+      <style>
+        /* Optional reset for cleaner look */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+          font-family: 'Inter', sans-serif;
+          background: #f9f9f9;
+          color: #222;
+          overflow-x: hidden;
+        }
+      </style>
+    </head>
+    <body>
+      ${code}
+    </body>
+    </html>
+  `;
+
+        newWindow.document.open();
+        newWindow.document.write(fullHTML);
         newWindow.document.close();
     };
+
 
     return (
         <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-[#0e0e10] text-gray-900 dark:text-white transition-colors duration-300">
