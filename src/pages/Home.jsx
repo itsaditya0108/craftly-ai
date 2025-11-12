@@ -56,7 +56,7 @@ const Home = () => {
         try {
             setLoading(true);
             const response = await ai.models.generateContent({
-                model: "gemini-1.5-flash",
+                model: "gemini-2.5-flash",
                 contents: `You are an experienced senior web developer and UI/UX designer with deep expertise in modern frontend technologies, responsive design, and animation. 
                 Generate a complete and high-quality UI component based on the following user input:
                  - **Component Description:** ${prompt}
