@@ -57,18 +57,32 @@ const Home = () => {
             setLoading(true);
             const response = await ai.models.generateContent({
                 model: "gemini-2.5-flash",
-                contents: `You are an experienced senior web developer and UI/UX designer with deep expertise in modern frontend technologies, responsive design, and animation. 
-                Generate a complete and high-quality UI component based on the following user input:
-                 - **Component Description:** ${prompt}
-                 - **Framework:** ${framework.value} 
-                ### Requirements: 
-                - Write clean, semantic, and well-structured code following best practices. 
-                - Use the specified framework only. - Ensure the design is **modern, fully responsive, and animated**. 
-                - Include smooth **hover effects, transitions, and shadows**. 
-                - Use **elegant colors, spacing, and typography** for visual appeal. 
-                - Optimize for **SEO and accessibility (a11y)** where applicable. 
-                - Do not include external explanations, comments, or text — **output only the complete code**. 
-                - Return the code properly formatted inside a **Markdown fenced code block**.`,
+                contents: `
+You are an expert frontend developer.
+
+Generate a **complete UI component in ONE single self-contained HTML file**.
+
+### Requirements:
+- Combine everything inside **one single HTML document**
+- All **CSS must be inside <style>...</style>**
+- All **JavaScript must be inside <script>...</script>**
+- Do NOT create or reference external files like style.css, script.js, fonts, or CDN CSS.
+- The output MUST be a full working HTML file wrapped inside a Markdown code fence.
+- Use the selected framework only: ${framework.value}
+- Must be fully responsive, modern, animated, and accessible (a11y).
+
+### Component Description:
+${prompt}
+
+### IMPORTANT:
+Return ONE file only containing:
+\`\`\`html
+<!DOCTYPE html>
+<html> ... (html + css + js)
+</html>
+\`\`\`
+`
+,
             });
             setCode(extractCode(response.text));
             setOutputScreen(true);
